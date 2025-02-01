@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { UserMenu } from "./UserMenu";
 
 interface HeaderProps {
   className?: string;
@@ -23,8 +24,12 @@ export const Header = ({ className }: HeaderProps) => {
           FlowBoard
         </Link>
 
-        <div className="border-l pl-5 dark:border-gray-800">
-          <ThemeToggle />
+        <div className="flex items-center gap-4">
+          <UserMenu />
+
+          <div className="border-l pl-5 dark:border-gray-800">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>
