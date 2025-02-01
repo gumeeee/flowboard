@@ -25,7 +25,7 @@ export function LoginForm() {
         <CardContent className="grid gap-4">
           <div>
             Don&apos;t have an account?{" "}
-            <Link href="/create-account" className="text-blue-500">
+            <Link href="/create-account" className="text-blue-600">
               Create account
             </Link>
           </div>
@@ -42,7 +42,7 @@ export function LoginForm() {
           <div className="grid gap-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              <Link href="/forgot-password" className="text-xs text-blue-500">
+              <Link href="/forgot-password" className="text-xs text-blue-600">
                 Forgot password?
               </Link>
             </div>
