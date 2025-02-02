@@ -19,10 +19,31 @@ import {
 import Link from "next/link";
 import { Button } from "./ui/button";
 import type { User } from "@supabase/supabase-js";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { auth } from "@/utils/auth";
 
-export function UserMenu() {
-  const handleSingOut = async () => {
-    console.log("Signing out...");
+interface UserMenuProps {
+  user: User;
+}
+
+export function UserMenu({ user }: UserMenuProps) {
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const handleSignOut = async () => {
+    try {
+      await auth.singOut();
+      router.push("/login");
+      router.refresh();
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+      });
+    }
   };
 
   return (
@@ -33,8 +54,17 @@ export function UserMenu() {
           size="icon"
           className="relative h-9 w-9 rounded-full border bg-background"
         >
-          <UserIcon />
-          <CircleUser className="sr-only" />
+          {user.user_metadata.avatar_url ? (
+            <Image
+              src={user.user_metadata.avatar_url}
+              alt={user.email || "User avatar"}
+              fill
+              className="rounded-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <CircleUser className="h-5 w-5" />
+          )}
           <span className="sr-only">Open user menu</span>
         </Button>
       </DropdownMenuTrigger>
@@ -42,9 +72,11 @@ export function UserMenu() {
       <DropdownMenuContent className="w-56" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Guilherme</p>
+            <p className="text-sm font-medium leading-none">
+              {user.user_metadata.full_name || user.email}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              guilherme@example.com
+              {user.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -79,7 +111,7 @@ export function UserMenu() {
 
         <DropdownMenuItem
           className="cursor-pointer text-red-600 dark:text-red-400 focus:text-red-600 dark:focus:text-red-400"
-          onSelect={handleSingOut}
+          onSelect={handleSignOut}
         >
           <LogOut className="mr-2 h-4 w-4" />
           <span>Sign out</span>

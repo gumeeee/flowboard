@@ -48,7 +48,23 @@ export const auth = {
 
     return data;
   },
-  login: async () => {},
+  signIn: async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) throw error;
+
+    if (data.user) {
+      await users.captureUserDetails(data.user);
+    }
+
+    return data;
+  },
+  singOut: async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw { message: error.message, status: error.status };
+  },
   signInWithOAuth: async () => {},
-  logout: async () => {},
 };
