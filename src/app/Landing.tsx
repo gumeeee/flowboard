@@ -91,7 +91,13 @@ export const Landing: React.FC = () => {
 
         <div className="relative w-full max-w-[1200px] mx-auto mt-20">
           <div className="relative">
-            <div className="relative bg-background/95 backdrop-blur rounded-lg shadow-2xl">
+            <div
+              className={`relative bg-background/95 backdrop-blur rounded-lg ${
+                resolvedTheme === "dark"
+                  ? "shadow-[0_35px_60px_-15px_rgba(255,255,255,0.3)]"
+                  : "shadow-2xl"
+              }`}
+            >
               <Image
                 src={
                   resolvedTheme === "dark"
