@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { users } from "@/utils/users";
 import { redirect } from "next/navigation";
 import React from "react";
-import { ProfileForm } from "./[profileId]/ProfileForm";
+import { ProfileForm } from "./ProfileForm";
 
 const ProfilePage = async () => {
   const supabase = await createClient();
