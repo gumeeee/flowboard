@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       "bfcvoikogyjfeqxzuaob.supabase.co",
+      "ivhpyprkkdgjyginzabs.supabase.co",
       "avatars.githubusercontent.com",
       "lh3.googleusercontent.com",
     ],
