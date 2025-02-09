@@ -38,8 +38,9 @@ export const DeleteProjectDialog = ({
         </DialogHeader>
         <div className="space-y-4 py-4">
           <p className="text-sm text-gray-500">
-            Please type <span className="font-semibold">{projectName}</span> to
-            confirm.
+            Please type{" "}
+            <span className="font-semibold text-slate-200">{projectName}</span>{" "}
+            to confirm.
           </p>
           <div className="space-y-2">
             <Label htmlFor="projectName">Project Name</Label>
