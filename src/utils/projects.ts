@@ -27,6 +27,15 @@ export const projects = {
 
       if (error) throw error;
     },
+
+    delete: async (projectId: string) => {
+      const { error } = await supabase
+        .from("projects")
+        .delete()
+        .eq("id", projectId);
+
+      if (error) throw error;
+    },
   },
 
   getUserProjects: async (userId: string) => {

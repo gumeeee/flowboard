@@ -100,6 +100,32 @@ export const Projects = ({ initialProjects }: ProjectsProps) => {
     }
   };
 
+  const handleDeleteProject = async () => {
+    if (!projectToDelete) return;
+
+    try {
+      await projects.administration.delete(projectToDelete.id);
+
+      setAvailableProjects((prev) =>
+        prev.filter((project) => project.id !== projectToDelete.id)
+      );
+
+      toast({
+        title: "Project Deleted ✅",
+        description: "Project has been deleted successfully!",
+      });
+    } catch (error) {
+      console.log("Error deleting project:", error);
+      toast({
+        variant: "destructive",
+        title: "Error ❌",
+        description: "Failed to delete project. Please try again. 🫤",
+      });
+    } finally {
+      setProjectToDelete(null);
+    }
+  };
+
   const handleSort = (order: "newest" | "oldest") => {
     setSortOrder(order);
   };
@@ -116,7 +142,7 @@ export const Projects = ({ initialProjects }: ProjectsProps) => {
         onSort={handleSort}
         setProjectToClose={setProjectToClose}
         setProjectToReopen={setProjectToReopen}
-        setProjectToDelete={() => {}}
+        setProjectToDelete={setProjectToDelete}
       />
 
       <CloseProjectDialog
@@ -129,7 +155,7 @@ export const Projects = ({ initialProjects }: ProjectsProps) => {
         <DeleteProjectDialog
           open={!!projectToDelete}
           onOpenChange={() => setProjectToDelete(null)}
-          onConfirm={() => {}}
+          onConfirm={handleDeleteProject}
           projectName={projectToDelete.name}
         />
       )}
