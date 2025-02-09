@@ -15,3 +15,14 @@ interface IUser {
   links: IUserLink[];
   provider: "google" | "github" | "email";
 }
+
+interface IProject {
+  id: string;
+  name: string;
+  description: string;
+  readme: string;
+  created_by: string;
+  created_at: Date;
+  updated_at: Date;
+  closed: boolean;
+}
