@@ -23,7 +23,7 @@ const FeaturesList = () => {
   ];
 
   return (
-    <div className="grid sm:grid-cols-2 gap-4 pt-4 max-w-[600px] mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 max-w-[600px] mx-auto">
       {features.map((feature, index) => (
         <motion.div
           key={feature}
@@ -44,7 +44,7 @@ const FeaturesList = () => {
 
 const HeroSection = ({ user }: { user: IUser | null }) => {
   return (
-    <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-16 mb-20 px-4">
+    <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-16 mb-20 px-4 sm:px-6 md:px-8">
       {/* Text Content with Creative Layout */}
       <motion.div
         className="lg:flex-1 space-y-8 relative z-10"
@@ -170,7 +170,7 @@ const ThemeImage = () => {
         type: "spring",
         stiffness: 200,
       }}
-      className="relative h-full w-full rounded-xl overflow-hidden md:w-[120%] md:h-[120%]" // Alteração aqui
+      className="relative h-full w-full rounded-xl overflow-hidden md:w-[100%] md:h-[120%] sm:w-full sm:h-auto" // Alteração aqui
     >
       <div
         className={`
@@ -226,7 +226,7 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <div className="grid md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       <AnimatePresence>
         {features.map((feature, index) => (
           <motion.div
@@ -250,7 +250,7 @@ const BackgroundElements = () => (
   <div className="fixed inset-0 -z-10 h-full w-full bg-background">
     <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-primary/5 to-background" />
     <motion.div
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-75 sm:scale-100"
       animate={{
         scale: [1, 1.2, 1],
         rotate: [0, 180, 360],
