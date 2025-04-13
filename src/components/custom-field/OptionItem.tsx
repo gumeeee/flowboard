@@ -1,15 +1,28 @@
 import { Ellipsis, GripVertical } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { CustomFieldTagRenderer } from "./CustomFieldTagRenderer";
 
-export const OptionItem = () => {
+interface Props {
+  item: ICustomFieldData;
+}
+
+export const OptionItem = ({ item }: Props) => {
   return (
-    <div className="border bg-white dark::bg-slate-950 h-[60px]">
+    <div className="border bg-white dark:bg-slate-950 h-[60px]">
       <div className="flex justify-between items-center p-4">
         <div className="flex gap-4 items-cente">
           <span>
             <GripVertical className="w-5 h-5 text-gray-400 dark:text-gray-600 cursor-grabbing" />
           </span>
-          {/* <CustomFieldTagRenderer /> */}
+          <CustomFieldTagRenderer
+            color={item.color || ""}
+            label={item.label || ""}
+          />
 
           <div className="hidden md:inline-block text-sm truncate">
             This item hasn&apos;t been started
@@ -23,7 +36,7 @@ export const OptionItem = () => {
 
           <DropdownMenuContent>
             <DropdownMenuItem>
-                <span>Edit</span>
+              <span>Edit</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

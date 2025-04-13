@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { successBtnStyles } from "@/app/commonStyles";
 import { OptionItem } from "./OptionItem";
+import { defaultStatuses } from "@/consts/default-options";
 
 interface Props {
   field: string;
@@ -24,7 +25,9 @@ export const CustomFieldOptions = ({ title, description }: Props) => {
         )}
 
         <div className="border rounded-sm">
-          <OptionItem />
+          {defaultStatuses.map((status) => (
+            <OptionItem key={status.id} item={status} />
+          ))}
         </div>
       </div>
     </>
