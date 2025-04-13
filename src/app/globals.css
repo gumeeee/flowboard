@@ -215,6 +215,11 @@ body[style*="overflow: hidden"] {
   box-shadow: 0 0 50px -15px rgba(255, 255, 255, 0.25);
 }
 
+.group:hover > * + * {
+  transform: translateX(5px); /* Move o próximo botão */
+  transition: transform 0.3s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;

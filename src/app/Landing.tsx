@@ -58,7 +58,7 @@ const HeroSection = ({ user }: { user: IUser | null }) => {
           >
             <span className="text-sm font-mono text-primary mb-2">
               {user
-                ? `Welcome back, ${user.email}!`
+                ? `Welcome back, ${user.name ?? 'User'}!`
                 : "Next-gen Task Management"}
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">

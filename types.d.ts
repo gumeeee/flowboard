@@ -26,3 +26,10 @@ interface IProject {
   updated_at: Date;
   closed: boolean;
 }
+
+interface ICustomFieldData {
+  id: string;
+  label?: string;
+  color?: string;
+  description?: string;
+}

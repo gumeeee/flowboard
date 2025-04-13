@@ -2,11 +2,23 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      "bfcvoikogyjfeqxzuaob.supabase.co",
-      "ivhpyprkkdgjyginzabs.supabase.co",
-      "avatars.githubusercontent.com",
-      "lh3.googleusercontent.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "bfcvoikogyjfeqxzuaob.supabase.co",
+      },
+      {
+        protocol: "https",
+        hostname: "ivhpyprkkdgjyginzabs.supabase.co",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };
