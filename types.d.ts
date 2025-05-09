@@ -32,4 +32,5 @@ interface ICustomFieldData {
   label?: string;
   color?: string;
   description?: string;
+  order: number;
 }

@@ -1,16 +1,71 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { successBtnStyles } from "@/app/commonStyles";
 import { OptionItem } from "./OptionItem";
 import { defaultStatuses } from "@/consts/default-options";
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 
 interface Props {
   field: string;
   title?: string;
   description?: string;
+  options: ICustomFieldData[];
 }
 
 export const CustomFieldOptions = ({ title, description }: Props) => {
+  const [options, setOptions] = useState(defaultStatuses);
+  const [activeOption, setActiveOption] = useState<ICustomFieldData | null>(
+    null
+  );
+  const [isClient, setIsClient] = useState(false);
+  const onDragStart = (event: DragStartEvent) => {
+    if (event.active.data.current?.type === "option") {
+      setActiveOption(event.active.data.current?.option);
+    }
+  };
+
+  const onDragEnd = (event: DragEndEvent) => {
+    setActiveOption(null);
+    const { active, over } = event;
+
+    if (!over) return;
+
+    if (active.id !== over.id) {
+      setOptions((prevOptions) => {
+        const activeIndex = prevOptions.findIndex(
+          (option) => option.id === active.id
+        );
+        const overIndex = prevOptions.findIndex(
+          (option) => option.id === over.id
+        );
+
+        const reorderedItems = arrayMove(prevOptions, activeIndex, overIndex);
+        return reorderedItems.map((item, index) => ({
+          ...item,
+          order: index,
+        }));
+      });
+    }
+  };
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       <div>
@@ -25,9 +80,24 @@ export const CustomFieldOptions = ({ title, description }: Props) => {
         )}
 
         <div className="border rounded-sm">
-          {defaultStatuses.map((status) => (
-            <OptionItem key={status.id} item={status} />
-          ))}
+          <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+            <SortableContext
+              items={options.map((item) => item.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              {options.map((status) => (
+                <OptionItem key={status.id} item={status} />
+              ))}
+            </SortableContext>
+
+            {isClient &&
+              createPortal(
+                <DragOverlay>
+                  {activeOption && <OptionItem item={activeOption} />}
+                </DragOverlay>,
+                document.body
+              )}
+          </DndContext>
         </div>
       </div>
     </>

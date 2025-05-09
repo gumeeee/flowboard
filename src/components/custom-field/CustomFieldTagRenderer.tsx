@@ -17,5 +17,11 @@ export const CustomFieldTagRenderer = ({ color, label }: Props) => {
     setStyles(getCustomFieldTagColorsForTheme(color, theme));
   }, [theme, color]);
 
-  return styles && <Badge className="rounded-full" style={styles}>{label}</Badge>;
+  return (
+    styles && (
+      <Badge className="rounded-full" style={styles}>
+        {label}
+      </Badge>
+    )
+  );
 };
